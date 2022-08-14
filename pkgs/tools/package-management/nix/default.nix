@@ -45,6 +45,7 @@ in lib.makeExtensible (self: {
       url = "https://nixos.org/releases/nix/nix-${version}/nix-${version}.tar.xz";
       sha256 = "sha256-fuaBtp8FtSVJLSAsO+3Nne4ZYLuBj2JpD2xEk7fCqrw=";
     };
+    patches = [ ./patches/skip-sandbox-test-nix_2_3.patch ];
   }).override { boehmgc = boehmgc-nix_2_3; };
 
   nix_2_4 = common {
@@ -58,12 +59,13 @@ in lib.makeExtensible (self: {
     version = "2.5.1";
     sha256 = "sha256-GOsiqy9EaTwDn2PLZ4eFj1VkXcBUbqrqHehRE9GuGdU=";
     # https://github.com/NixOS/nix/pull/5536
-    patches = [ ./patches/install-nlohmann_json-headers.patch ];
+    patches = [ ./patches/install-nlohmann_json-headers.patch ./patches/skip-sandbox-test-nix_2_5.patch ];
   };
 
   nix_2_6 = common {
     version = "2.6.1";
     sha256 = "sha256-E9iQ7f+9Z6xFcUvvfksTEfn8LsDfzmwrcRBC//5B3V0=";
+    patches = [  ./patches/skip-sandbox-test-nix_2_5.patch ];
   };
 
   nix_2_7 = common {
@@ -78,12 +80,14 @@ in lib.makeExtensible (self: {
         url = "https://github.com/NixOS/nix/commit/c9afca59e87afe7d716101e6a75565b4f4b631f7.patch";
         sha256 = "sha256-xz7QnWVCI12lX1+K/Zr9UpB93b10t1HS9y/5n5FYf8Q=";
       })
+      ./patches/skip-sandbox-test-nix_2_5.patch
     ];
   };
 
   nix_2_8 = common {
     version = "2.8.1";
     sha256 = "sha256-zldZ4SiwkISFXxrbY/UdwooIZ3Z/I6qKxtpc3zD0T/o=";
+    patches = [  ./patches/skip-sandbox-test-nix_2_5.patch ];
   };
 
   nix_2_9 = common {
@@ -96,6 +100,7 @@ in lib.makeExtensible (self: {
         url = "https://github.com/NixOS/nix/commit/1a994cc35b33dcfd484e7a96be0e76e23bfb9029.patch";
         sha256 = "sha256-7rDlqWRSVPijbvrTm4P+YykbMWyJryorXqGLEgg8/Wo=";
       })
+      ./patches/skip-sandbox-test-nix_2_5.patch
     ];
   };
   unstable = self.nix_2_9;
